@@ -18,6 +18,13 @@ modules:
       - source: system
         destination: /
 
+  - type: dnf
+    install:
+      packages:
+        # nodig om .script-opstartschermthema's te kunnen draaien — staat niet
+        # standaard op Bazzite (enkel de eenvoudige two-step/spinner-plugins wel)
+        - plymouth-plugin-script
+
   - type: script
     snippets:
       # het JARVIS-opstartscherm instellen als standaard + initramfs herbouwen
