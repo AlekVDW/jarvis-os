@@ -1,8 +1,13 @@
 # jarvis-os &nbsp; [![bluebuild build badge](https://github.com/alekvdw/jarvis-os/actions/workflows/build.yml/badge.svg)](https://github.com/alekvdw/jarvis-os/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+Een eigen, herbouwbare Linux-desktop op basis van [Bazzite](https://bazzite.gg) (Fedora Atomic +
+KDE Plasma), met een JARVIS-eigen opstartscherm en (later) een eigen bureaubladschil met een
+ingebouwde AI-assistent. Gebouwd via [BlueBuild](https://blue-build.org) — elke push naar `main`
+bouwt automatisch een nieuwe, ondertekende image.
 
-After setup, it is recommended you update this README to describe your custom image.
+Waarom Bazzite als basis in plaats van vanaf nul: kant-en-klare Proton/Steam-compatibiliteit,
+atomic/veilig (read-only systeem, automatische rollback), en meetbaar lichter dan Windows (gemeten
+in een test-VM: ~1,8GB RAM in rust tegenover Windows' 3,3-5GB).
 
 ## Installation
 

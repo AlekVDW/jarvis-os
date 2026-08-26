@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=JARVIS
+Description=JARVIS OS-opstartscherm — donker graphite met amber/ijsblauw accent
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/jarvis-theme
+ScriptFile=/usr/share/plymouth/themes/jarvis-theme/jarvis-theme.script

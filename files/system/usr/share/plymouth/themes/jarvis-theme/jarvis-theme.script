@@ -1,0 +1,42 @@
+// JARVIS OS — opstartscherm (Plymouth)
+// Bewust minimaal gehouden: geen losse beeldbestanden (het JARVIS-woordmerk wordt met
+// Image.Text getekend), één rustige ademende punt als enige animatie — zelfde principe
+// als de status-indicator in de widget-mockups: motion enkel voor een echte status
+// ("aan het opstarten"), geen doorlopende sier-animatie.
+
+// ---- kleuren, 1-op-1 uit src/theme/jarvis-theme.css ----
+background_r = 0.039; background_g = 0.055; background_b = 0.075;   // --bg #0A0E13
+text_r = 0.902; text_g = 0.929; text_b = 0.965;                     // --text #E6EDF6
+ice_r = 0.435; ice_g = 0.827; ice_b = 1.0;                          // --ice #6FD3FF
+
+Window.SetBackgroundTopColor(background_r, background_g, background_b);
+Window.SetBackgroundBottomColor(background_r, background_g, background_b);
+
+// ---- woordmerk, gecentreerd ----
+wordmark.image = Image.Text("JARVIS", text_r, text_g, text_b, 1, "Sans Bold 40");
+wordmark.sprite = Sprite(wordmark.image);
+wordmark.x = Window.GetX() + Window.GetWidth() / 2 - wordmark.image.GetWidth() / 2;
+wordmark.y = Window.GetY() + Window.GetHeight() / 2 - wordmark.image.GetHeight() / 2;
+wordmark.sprite.SetPosition(wordmark.x, wordmark.y, 10000);
+
+// ---- ademende punt, iets onder het woordmerk ----
+dot.image = Image.Text("●", ice_r, ice_g, ice_b, 1, "Sans 16");
+dot.sprite = Sprite(dot.image);
+dot.x = Window.GetX() + Window.GetWidth() / 2 - dot.image.GetWidth() / 2;
+dot.y = wordmark.y + wordmark.image.GetHeight() + 28;
+dot.sprite.SetPosition(dot.x, dot.y, 10000);
+
+fun refresh_callback() {
+    time = Plymouth.GetTime();
+    // Trage sinus, 0.35 - 1.0 opaciteit — "ademen", geen knipperen.
+    opacity = 0.35 + 0.65 * ((Math.Sin(time * 2.4) + 1) / 2);
+    dot.sprite.SetOpacity(opacity);
+}
+Plymouth.SetRefreshFunction(refresh_callback);
+
+// ---- overgang naar de inlogsessie: rustig laten wegvagen i.p.v. hard knippen ----
+fun quit_callback() {
+    wordmark.sprite.SetOpacity(0);
+    dot.sprite.SetOpacity(0);
+}
+Plymouth.SetQuitFunction(quit_callback);
